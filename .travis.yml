@@ -34,7 +34,7 @@ before_install:
 - export PATH="${RACKET_DIR}/bin:${PATH}" #install-racket.sh can't set for us
 
 install:
- - raco pkg install --deps search-auto
+ - cd selenium && raco pkg install --deps search-auto
 
 before_script:
 
@@ -42,9 +42,9 @@ before_script:
 # `raco pkg install --deps search-auto` to install any required
 # packages without it getting stuck on a confirmation prompt.
 script:
- - raco test -x -p selenium
+ - cd selenium && raco test -x -p selenium
 
 after_success:
- - raco setup --check-pkg-deps --pkgs selenium
- - raco pkg install --deps search-auto cover cover-coveralls
- - raco cover -b -f coveralls -d $TRAVIS_BUILD_DIR/coverage .
+ - cd selenium && raco setup --check-pkg-deps --pkgs selenium
+ - cd selenium && raco pkg install --deps search-auto cover cover-coveralls
+ - cd selenium && raco cover -b -f coveralls -d $TRAVIS_BUILD_DIR/coverage .
