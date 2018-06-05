@@ -2,7 +2,7 @@
 
 (define collection "selenium")
 (define version "0.1")
-(define deps '("base" "mock"))
+(define deps '("base" "mock" "mock-rackunit" "net-cookies-lib" "http"))
 (define build-deps '("rackunit-lib"))
 (define implies '())
 (define compile-omit-paths '())
