@@ -1,8 +1,8 @@
 #lang racket/base
 
-(require "private/chromedriver.rkt")
+(require "private/webdriver.rkt")
 
-(provide (all-from-out "private/chromedriver.rkt"))
+(provide (all-from-out "private/webdriver.rkt"))
 
 (module+ test
   (require rackunit))
