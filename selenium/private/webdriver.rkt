@@ -72,7 +72,7 @@
 
 
 (define (get-session-cookies)
-  (cookie-parse (json-get (format "/session/~a/cookie" (session-id (current-session))))))
+  (cookie-parse (json-get (format-url "/session/{sessionid}/cookie"))))
 
 
 (define (cookie-parse json)
@@ -103,7 +103,7 @@
 (define (find-element selector #:by [by "css selector"])
   (define response (json-post (format-url "/session/{sessionid}/element")
                               #:json (hash 'using by 'value selector)))
-  (element (hash-ref (hash-ref (string->jsexpr (bytes->string/utf-8 response)) 'value) 'ELEMENT)))
+  (element (hash-ref (hash-ref response 'value) 'ELEMENT)))
 
 
 (define (find-element/by-id id)
@@ -153,7 +153,7 @@
 (define (click elem)
   (define e (if (string? elem) (find-element elem) elem))
   (json-post
-   (format "/session/{sessionid}/element/{elementid}/click"
+   (format-url "/session/{sessionid}/element/{elementid}/click"
            (hash "elementid" (element-id e)))))
 
 (define
