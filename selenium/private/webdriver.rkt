@@ -220,7 +220,7 @@
 (define/mock (create-session)
   #:mock json-post #:as json-post-mock
 
-  (let ([response (json-post (format-url "/session")
+  (let ([response (json-post (string-append base-url "/session")
                              #:json *desiredCapabilities*)])
     (session (hash-ref response 'sessionId))))
 
