@@ -215,6 +215,11 @@
 (struct session (id) #:transparent)
 (struct element (id))
 
+(define (update-configuration #:browser [browser "chrome"])
+  (set! *desiredCapabilities* (hash 'desiredCapabilities (hash 'browserName browser)))
+  (unless (empty? (current-session))
+    (delete-session! (current-session))))
+
 (define current-session (make-parameter null))
 
 (define/mock (create-session)
