@@ -242,7 +242,7 @@
   #:mock json-delete
 
   (let ([ids (map (λ (item) (hash-ref item 'id))
-                  (hash-ref (json-get "/sessions") 'value))])
+                  (hash-ref (json-get (format "~a/sessions" base-url)) 'value))])
     (for-each (λ (id) (json-delete (format "~a/session/~a" base-url id))) ids)))
 
 
