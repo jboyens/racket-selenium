@@ -39,6 +39,7 @@
          open-url
          (struct-out element)
          (struct-out session)
+         update-configuration
          with-session)
 
 ;; (provide (contract-out
