@@ -320,7 +320,7 @@
                                                             (hash 'id "session-3"))))]
                                [json-delete void])
             (delete-all-sessions!)
-            (check-mock-called-with? json-get (arguments "/sessions"))
+            (check-mock-called-with? json-get (arguments "http://localhost:4444/wd/hub/sessions"))
             (check-mock-calls json-delete (list
                                            (arguments "http://localhost:4444/wd/hub/session/session-1")
                                            (arguments "http://localhost:4444/wd/hub/session/session-2")
