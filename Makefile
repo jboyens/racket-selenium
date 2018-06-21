@@ -1,4 +1,4 @@
-PACKAGE-NAME=selenium
+PACKAGE-NAME=racket-selenium
 DEPS-FLAGS=--check-pkg-deps --unused-pkg-deps
 
 all: setup

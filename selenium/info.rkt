@@ -1,7 +1,5 @@
-#lang info
+#lang setup/infotab
 
-(define collection "selenium")
-(define version "0.1")
 (define deps '("base" "mock" "net-cookies-lib" "http" "uri-template"))
 (define build-deps '("rackunit-lib" "mock-rackunit"))
 (define implies '())
