@@ -6,18 +6,19 @@
          "struct.rkt")
 
 (provide download-link
-         get-session-cookies
          http-request
          implicit-wait-time!
-         open-url)
+         visit)
 
 ;; (provide (contract-out
 ;;           [struct session ((id string?))]
 ;;           [struct element ((id string?))]
 ;;           [create-session (-> session?)]))
 
-(define/mock (open-url url)
+(define/mock (visit url)
+  #:mock json-post
   #:mock format-url
+
   (let ([session-url (format-url "/session/{sessionid}/url")])
     (json-post session-url #:json (hash 'url url))))
 
@@ -58,6 +59,14 @@
                            [format-url void])
         (check-equal? (current-url) "https://localhost"))))
 
+  (test-case "Test visit"
+    (with-mocks visit
+      (define mock-return (const (hash 'value "https://localhost")))
+
+      (with-mock-behavior ([json-post void/kw]
+                           [format-url (const "http://localhost:4444/wd/hub/session/fake-id/url")])
+        (visit "http://google.com")
+        (check-mock-called-with? json-post (arguments "http://localhost:4444/wd/hub/session/fake-id/url" #:json (hash 'url "http://google.com"))))))
 
     (test-case "Test implicit-wait-time!"
       (with-mocks implicit-wait-time!
